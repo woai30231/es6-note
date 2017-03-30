@@ -6,4 +6,4 @@
 
 ### 函数篇
 
-* **[箭头函数]()**
+* **[箭头函数](https://github.com/woai30231/es6-note/blob/master/function/arrow-function.md)**
