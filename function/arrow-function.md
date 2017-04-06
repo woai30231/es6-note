@@ -78,3 +78,126 @@
 	'use strict';
 	Demo();//undefined
 ```
+
+但某些时候，往往this的绑定的上下文不符合我们的实际需求，我们来看下下面的代码：
+
+```javascript
+ function Person(){
+ 	this.age = 0;
+ 	setTimeout(function(){
+ 		//这里我们期望实例化一秒之后，age改变为15
+ 		//但是因为这点的函数被当成一个普通方法调用了，
+ 		//所以这里的this绑定到全局，也就是说this.age = 0，但是window.age = 15
+ 		this.age = 15;
+ 	},1000);
+ };
+ var person = new Person();
+ setTimeout(function(){
+ 	 console.log(person.age); //0
+ 	 console.log(window.age); //15
+ },2000);
+```
+
+在es5中，我们可以通过以下方法解决这个问题，代码如：
+
+```javascript
+	function Person(){
+		var _that = this;
+		this.age = 0;
+		setTimeout(function(){
+			//这里我们先把当前对象的引用用变量保存起来从而实现上下文正确绑定
+			_that.age = 15;
+		},1000);
+	};
+	var person = new Person();
+	setTimeout(function(){
+		 console.log(person.age); //15
+		 console.log(window.age); //undefined
+	},2000);
+```
+
+上面代码经过更改之后从而实现了this的正确绑定，但是如果我们用es6中的箭头函数实现的话，不经过处理，this就能正确绑定我们需要的上下文，代码如下：
+
+```javascript
+	function Person(){
+		this.age = 0;
+		setTimeout(()=>this.age=15,1000);
+	};
+	var person = new Person();
+	setTimeout(()=>{
+		console.log(person.age);//15
+		console.log(window.age);//undefined
+	},1100);
+```
+这是什么原因呢？因为es6箭头函数不会创建自己的this上下文，而是根据当前封闭的作用域内找到this，然后此this就是箭头函数中的this，从而上面的代码就符合我们的工作期望！请记住，this只能是当前封闭作用域下的this而不能是外层作用域的this，如下面的代码：
+
+
+```javascript
+	this.age = 15;
+	function Person(){
+		var change = ()=>this.age=30;
+		change();
+	};
+	Person();
+	console.log(this.age);//15
+```
+
+从这里我们知道，当Person当作普通方法调用的时候，内部使用的箭头函数所绑定的this只能在内部，而没有在外部！
+
+当我们用call或apply绑定特定上下文的时候，箭头函数是不会保存this的引用的，看下面的代码：
+
+```javascript
+var adder = {
+  base: 1,
+    
+  add: function(a) {
+    var f = v =>{
+    	console.log(this == true);//true
+    	return v + this.base;
+    };
+    return f(a);
+  },
+
+  addThruCall: function(a) {
+    var f = v =>{
+    	console.log(this == true);//true
+    	return v + this.base;
+    };
+    var b = {
+      base: 2
+    };
+            
+    return f.call(b, a);
+  }
+};
+
+console.log(adder.add(1));         //  2
+console.log(adder.addThruCall(1)); //  2 still
+```
+上面的代码中，我们企图用方法的call方法来改变当前方法的上下文，但都未成功，请记住：只要在一个对象里面用箭头函数调用this，那么this总是指向这个对象，无论使用apply或call与否，这点跟es5是有区别的！
+
+我们再来看一下箭头函数中arguments的绑定情况，在es5中，arguments表示是一个函数参数数组，但是在es6箭头函数中，arguments就不会绑定了，arguments的值是一个查找的过程，看下面的代码：
+
+
+```javascript
+var arguments = 30;
+var _test = ()=>arguments;
+var a = _test();
+console.log(a);//30
+function demo(){
+	var f = (i)=>arguments[0] + i;
+	return f(2);
+};
+var b = demo(1);
+console.log(b);//3
+```
+
+由上面的代码可以看出，箭头函数中的arguments并不是指的是函数的参数数组，而是一个某一个具体的变量，如上面的全局变量arguments和demo函数的参数数组（这里因为demo函数不是箭头函数，所以它内部的箭头函数在引用arguments的时候，实际上此时的arguments就是demo函数的参数数组）！
+
+但是我们这里有个问题了，如果我们想在es6中引用一个参数数组，怎么实现呢？此时我们只需要用到es6中的参数扩展就是可实现这个需求，如：
+
+```javascript
+var getArgs0 = (...args)=> args[0];
+var a = getArgs0('hello','world');
+console.log(a);
+```
