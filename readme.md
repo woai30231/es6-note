@@ -9,3 +9,7 @@
 ### 函数篇
 
 * **[箭头函数](https://github.com/woai30231/es6-note/blob/master/function/arrow-function.md)**
+
+### 操作符篇
+
+* **[spread syntax and rest syntax](https://github.com/woai30231/es6-note/blob/master/operator/spreadAndRest)**
