@@ -16,4 +16,4 @@
 
 ### 字符串篇
 
-* **[js中字符串字符串表示、已经码点和字符串互转](https://github.com/woai30231/es6-note/blob/master/String/article1.md)**
+* **[js中字符串字符串表示、以及码点和字符串互转](https://github.com/woai30231/es6-note/blob/master/String/article1.md)**
