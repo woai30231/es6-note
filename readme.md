@@ -13,3 +13,7 @@
 ### 操作符篇
 
 * **[spread syntax and rest syntax](https://github.com/woai30231/es6-note/blob/master/operator/spreadAndRest)**
+
+### 字符串篇
+
+* **[js中字符串字符串表示、已经码点和字符串互转](https://github.com/woai30231/es6-note/blob/master/String/article1.md)**
