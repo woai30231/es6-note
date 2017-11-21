@@ -65,5 +65,5 @@
 在es5中主要在String对象上调用fromCharCode方法，如：
 
 ```javascript
-  
+  var a = String.fromChatCode()
 ```
