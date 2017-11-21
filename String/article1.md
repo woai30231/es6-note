@@ -42,3 +42,28 @@
   '\u{7A}' === 'z' // true
   //es6加大括号法，支持双字节字符
 ```
+
+#### 字符转Unicode码
+
+在es5中主要是在字符实例上调用调用charCodeAt方法，如：
+
+```javascript
+  var str = 'hello world!';
+  var strCode = str.charCodeAt(0);
+  //104
+```
+但是这种方法在用在某些双字节字符上的时候，会有点意外情况，所以es6中支持codePointAt方法，来读取双字节字符的Unicode码，其使用方式更charCodeAt一样，如：
+
+```javascript
+  var str = '𠮷'
+  var strCode = str.codePointAt(0)
+  //20bb7
+```
+
+#### Unicode码转字符
+
+在es5中主要在String对象上调用fromCharCode方法，如：
+
+```javascript
+  
+```
