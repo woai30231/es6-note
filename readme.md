@@ -17,3 +17,7 @@
 ### 字符串篇
 
 * **[js中字符串字符串表示、以及码点和字符串互转](https://github.com/woai30231/es6-note/blob/master/String/article1.md)**
+
+### 杂文篇
+
+* **[es6函数参数默认值设置之对象解构传参](https://github.com/woai30231/es6-note/blob/master/article/001.md)**
