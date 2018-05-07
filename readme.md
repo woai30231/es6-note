@@ -23,3 +23,5 @@
 * **[es6函数参数默认值设置——对象解构传参](https://github.com/woai30231/es6-note/blob/master/article/001.md)**
 
 * **[多种方法来实现数组的去重](https://github.com/woai30231/es6-note/blob/master/article/002.md)**
+
+* **[promise介绍](https://github.com/woai30231/es6-note/blob/master/article/003.md)**
