@@ -25,3 +25,5 @@
 * **[复制对象姿势](https://github.com/woai30231/es6-note/blob/master/article/004.md)**
 
 * **[es6模块系统](https://github.com/woai30231/es6-note/blob/master/article/005.md)**
+
+* **[js装饰器](https://github.com/woai30231/es6-note/blob/master/article/006.md)**
